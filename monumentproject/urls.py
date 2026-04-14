@@ -16,8 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework_simplejwt.views import TokenRefreshView
+from monumentapp.views import CustomTokenView   
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('monumentapp/', include('monumentapp.urls'))
+    path('api/', include('monumentapp.urls')),
+
+    # JWT
+    path('api/login', CustomTokenView.as_view()),
+    path('api/refresh', TokenRefreshView.as_view()),
 ]
